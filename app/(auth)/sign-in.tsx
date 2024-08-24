@@ -1,13 +1,14 @@
 import { useSignIn } from "@clerk/clerk-expo";
 import { Link, useRouter } from "expo-router";
-import { Text, TextInput, Button, View } from "react-native";
+import { Text, TextInput, Button, View, TouchableOpacity } from "react-native";
 import React from "react";
 import {
   SignInWithOAuthApple,
   SignInWithOAuthGoogle,
 } from "../../shared/components/SignInWithOAuth";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function Page() {
+export default function SignIn() {
   const { signIn, setActive, isLoaded } = useSignIn();
   const router = useRouter();
 
@@ -39,43 +40,132 @@ export default function Page() {
   }, [isLoaded, emailAddress, password]);
 
   return (
-    <View>
+    <SafeAreaView>
       <View
         style={{
-          marginTop: 20,
-          marginBottom: 20,
+          height: "95%",
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        <Text>With Social Providers</Text>
-        <SignInWithOAuthGoogle />
-        <SignInWithOAuthApple />
+        <View
+          style={{
+            width: "90%",
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 25,
+              marginBottom: 20,
+              fontWeight: 500,
+              alignSelf: "center",
+            }}
+          >
+            Log In or Sign up
+          </Text>
+          <View>
+            <TextInput
+              autoCapitalize="none"
+              value={emailAddress}
+              placeholder="Email..."
+              onChangeText={(emailAddress) => setEmailAddress(emailAddress)}
+              style={{
+                width: "100%",
+                borderWidth: 0,
+                borderColor: "black",
+                padding: 10,
+                backgroundColor: "#e0e0e0",
+                borderBottomLeftRadius: 5,
+                borderBottomRightRadius: 5,
+                borderTopLeftRadius: 5,
+                borderTopRightRadius: 5,
+                marginBottom: 10,
+              }}
+            />
+            <TextInput
+              value={password}
+              placeholder="Password..."
+              secureTextEntry={true}
+              onChangeText={(password) => setPassword(password)}
+              style={{
+                width: "100%",
+                borderWidth: 0,
+                borderColor: "black",
+                padding: 10,
+                backgroundColor: "#e0e0e0",
+                borderBottomLeftRadius: 5,
+                borderBottomRightRadius: 5,
+                borderTopLeftRadius: 5,
+                borderTopRightRadius: 5,
+                marginBottom: 10,
+              }}
+            />
+            <TouchableOpacity
+              style={{
+                width: "100%",
+                borderWidth: 0,
+                borderColor: "black",
+                padding: 10,
+                backgroundColor: "#070707",
+                borderBottomLeftRadius: 5,
+                borderBottomRightRadius: 5,
+                borderTopLeftRadius: 5,
+                borderTopRightRadius: 5,
+                marginBottom: 10,
+              }}
+              onPress={onSignInPress}
+            >
+              <Text
+                style={{
+                  fontSize: 14,
+                  alignSelf: "center",
+                  color: "white",
+                }}
+              >
+                Continue
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <Text
+            style={{
+              marginTop: 5,
+              marginBottom: 5,
+              alignSelf: "center",
+              color: "#696969",
+              fontSize: 12,
+            }}
+          >
+            Or
+          </Text>
+          <View>
+            <SignInWithOAuthGoogle />
+            <SignInWithOAuthApple />
+          </View>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: 10,
+            }}
+          >
+            <Text>Don't have an account?</Text>
+            <Link href="/sign-up">
+              <Text
+                style={{
+                  color: "#0000EE",
+                }}
+              >
+                Sign up
+              </Text>
+            </Link>
+          </View>
+        </View>
       </View>
-      <View
-        style={{
-          marginBottom: 20,
-        }}
-      >
-        <Text>With Email and Password</Text>
-        <TextInput
-          autoCapitalize="none"
-          value={emailAddress}
-          placeholder="Email..."
-          onChangeText={(emailAddress) => setEmailAddress(emailAddress)}
-        />
-        <TextInput
-          value={password}
-          placeholder="Password..."
-          secureTextEntry={true}
-          onChangeText={(password) => setPassword(password)}
-        />
-        <Button title="Sign In" onPress={onSignInPress} />
-      </View>
-      <View>
-        <Text>Don't have an account?</Text>
-        <Link href="/sign-up">
-          <Text>Sign up</Text>
-        </Link>
-      </View>
-    </View>
+    </SafeAreaView>
   );
 }

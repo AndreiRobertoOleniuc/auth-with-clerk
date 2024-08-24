@@ -1,8 +1,9 @@
 import React from "react";
 import * as WebBrowser from "expo-web-browser";
-import { View, Button } from "react-native";
+import { TouchableOpacity, Text, View, Image } from "react-native";
 import { useOAuth } from "@clerk/clerk-expo";
 import * as Linking from "expo-linking";
+import images from "../constants/images";
 
 export const useWarmUpBrowser = () => {
   React.useEffect(() => {
@@ -40,9 +41,41 @@ export const SignInWithOAuthGoogle = () => {
   }, []);
 
   return (
-    <View>
-      <Button title="Sign in with Google" onPress={signInWith} />
-    </View>
+    <TouchableOpacity
+      style={{
+        width: "100%",
+        borderWidth: 1,
+        borderColor: "#c3c3c3",
+        padding: 10,
+        borderBottomLeftRadius: 5,
+        borderBottomRightRadius: 5,
+        borderTopLeftRadius: 5,
+        borderTopRightRadius: 5,
+        marginBottom: 10,
+      }}
+      onPress={signInWith}
+    >
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
+        <Image
+          source={images.googleIcon}
+          style={{
+            width: 20,
+            height: 20,
+            marginRight: 10,
+          }}
+          resizeMode="contain"
+        />
+        <Text style={{ fontWeight: 400 }}>Continue with Google</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 
@@ -69,8 +102,40 @@ export const SignInWithOAuthApple = () => {
   }, []);
 
   return (
-    <View>
-      <Button title="Sign in with Apple" onPress={signInWith} />
-    </View>
+    <TouchableOpacity
+      style={{
+        width: "100%",
+        borderWidth: 1,
+        borderColor: "#c3c3c3",
+        padding: 10,
+        borderBottomLeftRadius: 5,
+        borderBottomRightRadius: 5,
+        borderTopLeftRadius: 5,
+        borderTopRightRadius: 5,
+        marginBottom: 10,
+      }}
+      onPress={signInWith}
+    >
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
+        <Image
+          source={images.appleIcon}
+          style={{
+            width: 20,
+            height: 15,
+            marginRight: 10,
+          }}
+          resizeMode="contain"
+        />
+        <Text style={{ fontWeight: 400 }}>Continue with Apple</Text>
+      </View>
+    </TouchableOpacity>
   );
 };

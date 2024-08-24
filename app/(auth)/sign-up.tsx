@@ -2,8 +2,13 @@ import * as React from "react";
 import { TextInput, Button, View } from "react-native";
 import { useSignUp } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  SignInWithOAuthApple,
+  SignInWithOAuthGoogle,
+} from "../../shared/components/SignInWithOAuth";
 
-export default function SignUpScreen() {
+export default function SignUp() {
   const { isLoaded, signUp, setActive } = useSignUp();
   const router = useRouter();
 
@@ -57,9 +62,11 @@ export default function SignUpScreen() {
   };
 
   return (
-    <View>
+    <SafeAreaView>
       {!pendingVerification && (
         <>
+          <SignInWithOAuthGoogle />
+          <SignInWithOAuthApple />
           <TextInput
             autoCapitalize="none"
             value={emailAddress}
@@ -74,7 +81,7 @@ export default function SignUpScreen() {
           />
           <Button title="Sign Up" onPress={onSignUpPress} />
         </>
-      )}    
+      )}
       {pendingVerification && (
         <>
           <TextInput
@@ -85,6 +92,6 @@ export default function SignUpScreen() {
           <Button title="Verify Email" onPress={onPressVerify} />
         </>
       )}
-    </View>
+    </SafeAreaView>
   );
 }
