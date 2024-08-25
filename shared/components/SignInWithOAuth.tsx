@@ -18,7 +18,7 @@ export const useWarmUpBrowser = () => {
 
 WebBrowser.maybeCompleteAuthSession();
 
-export const SignInWithOAuthGoogle = () => {
+export const SignInWithOAuthGoogle = ({ title }: { title: string }) => {
   useWarmUpBrowser();
 
   const { startOAuthFlow } = useOAuth({ strategy: "oauth_google" });
@@ -73,13 +73,13 @@ export const SignInWithOAuthGoogle = () => {
           }}
           resizeMode="contain"
         />
-        <Text style={{ fontWeight: 400 }}>Continue with Google</Text>
+        <Text style={{ fontWeight: 400 }}>{title}</Text>
       </View>
     </TouchableOpacity>
   );
 };
 
-export const SignInWithOAuthApple = () => {
+export const SignInWithOAuthApple = ({ title }: { title: string }) => {
   useWarmUpBrowser();
 
   const { startOAuthFlow } = useOAuth({ strategy: "oauth_apple" });
@@ -134,7 +134,7 @@ export const SignInWithOAuthApple = () => {
           }}
           resizeMode="contain"
         />
-        <Text style={{ fontWeight: 400 }}>Continue with Apple</Text>
+        <Text style={{ fontWeight: 400 }}>{title}</Text>
       </View>
     </TouchableOpacity>
   );
